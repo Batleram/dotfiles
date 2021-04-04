@@ -10,6 +10,7 @@ rm -rf ~/.p10k.zsh
 rm -rf ~/.oh-my-zsh
 rm -rf ~/.config/nvim
 rm -rf ~/.config/coc 
+rm -rf ~/.config/kitty
 
 ln -sf $currentDir/.zshrc ~/.zshrc
 ln -sf $currentDir/.bashrc ~/.bashrc
@@ -21,3 +22,4 @@ ln -sf $currentDir/.oh-my-zsh ~/.oh-my-zsh
 
 ln -sf $currentDir/.config/nvim ~/.config/nvim
 ln -sf $currentDir/.config/coc ~/.config/coc
+ln -sf $currentDir/.config/kitty ~/.config/kitty
