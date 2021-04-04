@@ -1,0 +1,1 @@
+/home/me/.p10k.zsh
