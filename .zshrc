@@ -121,6 +121,7 @@ complete -cf sudo
 
 #aliases
 alias vi="nvim"
+alias altf4="exit"
 
 # work command
 declare -A workspaces=( 
