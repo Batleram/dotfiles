@@ -123,30 +123,8 @@ complete -cf sudo
 alias vi="nvim"
 alias altf4="exit"
 
-# work command
-declare -A workspaces=( 
-	[sch]=/home/me/Documents/notes-cours
-	[py]=/home/me/Documents/python 
-)
-
-function work(){
-if [ $# -eq 0 ]
-then
-	echo "You need to specify an option"
-	echo ${workspaces}
-else
-	if [ ${workspaces[$1]+_} ]
-	then
-		cd ${workspaces[$1]}
-		nvim
-	else
-		echo "Invalid workspace"
-	fi
-fi
-}
-
 # bash reload command
-alias rel="source /home/me/.zshrc"
+alias rel="source ~/.zshrc"
 
 # nick command
 function nick(){
