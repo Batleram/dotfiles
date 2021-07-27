@@ -19,7 +19,7 @@ ln -sf $currentDir/.bashrc ~/.bashrc
 ln -sf $currentDir/.fonts ~/.fonts
 ln -sf $currentDir/.fonts.conf ~/.fonts.conf
 ln -sf $currentDir/.p10k.zsh ~/.p10k.zsh
-ln -sf $currentDir/.oh-my-zsh ~/.oh-my-bash
+ln -sf $currentDir/.oh-my-bash ~/.oh-my-bash
 ln -sf $currentDir/.oh-my-zsh ~/.oh-my-zsh
 # install zsh stuff
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
