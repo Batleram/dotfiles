@@ -8,11 +8,12 @@ Plug 'prettier/vim-prettier'
 Plug 'tmsvg/pear-tree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lervag/vimtex'
-Plug 'OmniSharp/omnisharp-vim'
+Plug 'prabirshrestha/vim-lsp'
+"Plug 'OmniSharp/omnisharp-vim'
 
 "c++
 Plug 'justmao945/vim-clang'
-Plug 'rhysd/vim-clang-format'
+"Plug 'rhysd/vim-clang-format'
 "finish installing plugins
 call plug#end()
 
@@ -58,19 +59,28 @@ set tabstop=4
 set scrolloff=3
 
 " c++ auto format
-let g:clang_format#auto_format = 1
-let g:clang_format#style_options = {
-	  \ "AccessModifierOffset" : -4,
-	  \ "AllowShortIfStatementsOnASingleLine" : "true",
-	  \ "AlwaysBreakTemplateDeclarations" : "true",
-	  \ "Standard" : "C++11",
-	  \ "BreakBeforeBraces" : "Stroustrup",
-	  \ "IndentWidth": 4}
+"let g:clang_format#auto_format = 1
+"let g:clang_format#style_options = {
+"	  \ "AccessModifierOffset" : -4,
+"	  \ "AllowShortIfStatementsOnASingleLine" : "true",
+"	  \ "AlwaysBreakTemplateDeclarations" : "true",
+"	  \ "Standard" : "C++11",
+"	  \ "BreakBeforeBraces" : "Stroustrup",
+"	  \ "IndentWidth": 4}
 
 
 " vimtex
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
+
+
+" tsserver
+" had issues with false errors
+augroup ReactFiletypes
+  autocmd!
+  autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
+  autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
+augroup END
 
 

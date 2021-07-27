@@ -160,4 +160,6 @@ fi
 }
 
 
+# plateformio
+export PATH=$PATH:~/.platformio/penv/bin
 
