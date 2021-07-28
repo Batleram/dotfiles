@@ -102,4 +102,4 @@ source $OSH/oh-my-bash.sh
 
 
 # bash reload command
-alias rel="source ~/.zshrc"
+alias rel="source ~/.bashrc"
