@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/me/.oh-my-bash
+export OSH=~/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -102,4 +102,4 @@ source $OSH/oh-my-bash.sh
 
 
 # bash reload command
-alias rel="source ~/.zshrc"
+alias rel="source ~/.bashrc"
