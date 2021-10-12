@@ -1786,5 +1786,8 @@
         "/home/me/node_modules/eslint/lib/api.js": true
       }
     }
+  },
+  "coc-rust-analyzer|global": {
+    "release": "2021-09-20"
   }
 }
