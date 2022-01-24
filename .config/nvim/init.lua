@@ -12,6 +12,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'tree-sitter/tree-sitter'
     Plug 'tami5/lspsaga.nvim'
+    Plug 'williamboman/nvim-lsp-installer'
     
     -- COMPLETION
     Plug 'hrsh7th/nvim-cmp'
@@ -41,19 +42,37 @@ vim.g.edge_disable_italic_comment = 1
 vim.cmd("colorscheme edge")
 
 -- setup lsp servers
+ local lsp_installer = require("nvim-lsp-installer")
+ 
+ 
+ lsp_installer.on_server_ready(function(server)
+     local options = {
+             capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+             -- on_attach = on_attach,
+             flags = {
+               debounce_text_changes = 150,
+             }
+     }
+     if server.name == "rust-analyzer" then
+         options.procMacro.enable = false
+     end
+     server:setup(options)
+ end)
+
+
 local lspconfig = require('lspconfig')
-lspconfig.pyright.setup{} --python `npm i -g pyright`
-lspconfig.tsserver.setup{
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-} -- js + ts `npm install -g typescript typescript-language-server`
+--lspconfig.pyright.setup{} --python `npm i -g pyright`
+--lspconfig.tsserver.setup{
+--    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--} -- js + ts `npm install -g typescript typescript-language-server`
 lspconfig.rust_analyzer.setup{} -- rust `pacman -S rust-analyzer
-lspconfig.bashls.setup{} -- bash `yay -S bash-language-server`
-lspconfig.csharp_ls.setup{} -- dotnet tool install --global csharp-ls and add: export PATH="$PATH:/home/me/.dotnet/tools" to .*shrc
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false
-    }
-)
+--lspconfig.bashls.setup{} -- bash `yay -S bash-language-server`
+--lspconfig.csharp_ls.setup{} -- dotnet tool install --global csharp-ls and add: export PATH="$PATH:/home/me/.dotnet/tools" to .*shrc
+--vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--    vim.lsp.diagnostic.on_publish_diagnostics, {
+--        virtual_text = false
+--    }
+--)
 
 -- Setup lspsaga
 local saga = require 'lspsaga'
@@ -71,28 +90,28 @@ keymap('n', '<a-cr>', ':Lspsaga code_action<CR>', {noremap = true, silent=true})
 keymap('v', '<a-cr>', ':Lspsaga range_code_action<CR>', {noremap = true, silent=true})
 
 -- setup nvim-compe
-local cmp = require'cmp'
-cmp.setup({
-     snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end,
-    },
-    mapping = {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }),
-        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {"i","s",}),
-        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {"i","s",}),
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'buffer' },
-        { name = 'luasnip' }
-    }
-})
+ local cmp = require'cmp'
+ cmp.setup({
+      snippet = {
+       expand = function(args)
+         require("luasnip").lsp_expand(args.body)
+       end,
+     },
+     mapping = {
+         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+         ['<C-Space>'] = cmp.mapping.complete(),
+         ['<C-e>'] = cmp.mapping.close(),
+         ['<CR>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }),
+         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {"i","s",}),
+         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {"i","s",}),
+     },
+     sources = {
+         { name = 'nvim_lsp' },
+         { name = 'buffer' },
+         { name = 'luasnip' }
+     }
+ })
 -- parentheses pair
 require('nvim-autopairs').setup{}
 cmp.event:on( 'confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({  map_char = { tex = '' } }))
