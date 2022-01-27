@@ -141,3 +141,5 @@ fi
 # plateformio
 export PATH=$PATH:~/.platformio/penv/bin
 
+# csharp-ls
+export PATH="$PATH:/home/me/.dotnet/tools"

@@ -5,12 +5,14 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'preservim/nerdtree'
 
     -- THEMES
-    --   Plug 'sainnhe/sonokai'
+    Plug 'sainnhe/sonokai'
     Plug 'sainnhe/edge'
-    Plug 'windwp/nvim-autopairs'
+    Plug 'mangeshrex/uwu.vim'
+    Plug '4513ECHO/vim-colors-hatsunemiku'
+
     -- LSP
     Plug 'neovim/nvim-lspconfig'
-    Plug 'tree-sitter/tree-sitter'
+    Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'tami5/lspsaga.nvim'
     Plug 'williamboman/nvim-lsp-installer'
     
@@ -21,46 +23,66 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
 
+    -- UTIL
+    Plug 'windwp/nvim-autopairs'
+    Plug 'terrortylor/nvim-comment'
+
     -- LINTING
     Plug 'dense-analysis/ale'
 
     -- QOL
     Plug 'tpope/vim-fugitive'
+    Plug 'christoomey/vim-tmux-navigator'
 vim.call('plug#end')
 
 -- apply color scheme
 vim.o.termguicolors = true
--- -- available themes: default atlantis andromeda shusia maia
--- vim.g.sonokai_style = 'atlantis'
--- vim.g.sonokai_enable_italic = 0
--- vim.g.sonokai_disable_italic_comment = 1
--- vim.cmd("colorscheme sonokai")
--- available themes: default aura neon
+-- available themes: default atlantis andromeda shusia maia
+vim.g.sonokai_style = 'atlantis'
+vim.g.sonokai_enable_italic = 0
+vim.g.sonokai_disable_italic_comment = 1
 vim.g.edge_style = 'neon'
 vim.g.edge_enable_italic = 0
 vim.g.edge_disable_italic_comment = 1
-vim.cmd("colorscheme edge")
+vim.g.UwuNR=1
+-- vim.cmd("colorscheme sonokai")
+--vim.cmd("colorscheme edge")
+vim.cmd("colorscheme sonokai")
 
 -- setup lsp servers
- local lsp_installer = require("nvim-lsp-installer")
- 
- 
- lsp_installer.on_server_ready(function(server)
-     local options = {
-             capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-             -- on_attach = on_attach,
-             flags = {
-               debounce_text_changes = 150,
-             }
-     }
-     if server.name == "rust-analyzer" then
-         options.procMacro.enable = false
-     end
-     server:setup(options)
- end)
+local lsp_installer = require("nvim-lsp-installer")
+
+
+lsp_installer.on_server_ready(function(server)
+    local options = {
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            -- on_attach = on_attach,
+            flags = {
+              debounce_text_changes = 150,
+            }
+    }
+    if server.name == "rust-analyzer" then
+        options.procMacro.enable = false
+    end
+    server:setup(options)
+end)
 
 
 local lspconfig = require('lspconfig')
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/home/me/.local/bin/omnisharp/run"
+require'lspconfig'.omnisharp.setup {
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+    on_attach = function(client)
+        require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    end
+}
+-- local omnisharp_bin = '/usr/bin/omnisharp'
+-- local pid = vim.fn.getpid()
+-- require'lspconfig'.omnisharp.setup{
+--     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
+--     root_dir = lspconfig.util.root_pattern("*.csproj","*.sln");
+-- }
 --lspconfig.pyright.setup{} --python `npm i -g pyright`
 --lspconfig.tsserver.setup{
 --    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -112,6 +134,17 @@ keymap('v', '<a-cr>', ':Lspsaga range_code_action<CR>', {noremap = true, silent=
          { name = 'luasnip' }
      }
  })
+
+-- TreeSitter
+require('nvim-treesitter.configs').setup({
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  }
+})
 -- parentheses pair
 require('nvim-autopairs').setup{}
 cmp.event:on( 'confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({  map_char = { tex = '' } }))
@@ -120,8 +153,15 @@ cmp.event:on( 'confirm_done', require("nvim-autopairs.completion.cmp").on_confir
 vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {"prettier",  "black", "rustfmt"}
 vim.g.ale_javascript_prettier_options = '--tab-width 4'
+vim.g.ale_linters = { cs =  {"OmniSharp"} }
 
 
+-- Toggle Comment
+require('nvim_comment').setup({
+    line_mapping = "<C-_>", 
+    operator_mapping = "<C-_>",
+    comment_empty = false
+})
 
 
 -- disable wrap
