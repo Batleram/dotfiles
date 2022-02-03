@@ -7,12 +7,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     -- THEMES
     Plug 'sainnhe/sonokai'
     Plug 'sainnhe/edge'
-    Plug 'mangeshrex/uwu.vim'
+    Plug 'Batleram/uwu.vim'
     Plug '4513ECHO/vim-colors-hatsunemiku'
 
     -- LSP
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate']})
     Plug 'tami5/lspsaga.nvim'
     Plug 'williamboman/nvim-lsp-installer'
     
@@ -47,7 +47,7 @@ vim.g.edge_disable_italic_comment = 1
 vim.g.UwuNR=1
 -- vim.cmd("colorscheme sonokai")
 --vim.cmd("colorscheme edge")
-vim.cmd("colorscheme sonokai")
+vim.cmd("colorscheme uwu")
 
 -- setup lsp servers
 local lsp_installer = require("nvim-lsp-installer")
@@ -182,4 +182,5 @@ vim.wo.scrolloff=3
 -- remaps
 -- Y acts like D and C, it yoinks to end of line
 keymap('n', 'Y', 'y$', {noremap = true})
+keymap('n', '<Space>nt', ':NERDTree<CR>', {noremap = true})
 
