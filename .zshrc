@@ -143,3 +143,6 @@ export PATH=$PATH:~/.platformio/penv/bin
 
 # csharp-ls
 export PATH="$PATH:/home/me/.dotnet/tools"
+
+# default editor
+export EDITOR='program'
