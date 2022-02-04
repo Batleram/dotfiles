@@ -12,6 +12,7 @@ rm -rf ~/.oh-my-bash
 rm -rf ~/.config/nvim
 rm -rf ~/.config/coc 
 rm -rf ~/.config/kitty
+rm -rf ~/.config/tmux
 rm -rf ~/.conky
 
 ln -sf $currentDir/.zshrc ~/.zshrc
@@ -21,6 +22,7 @@ ln -sf $currentDir/.fonts.conf ~/.fonts.conf
 ln -sf $currentDir/.p10k.zsh ~/.p10k.zsh
 ln -sf $currentDir/.oh-my-bash ~/.oh-my-bash
 ln -sf $currentDir/.oh-my-zsh ~/.oh-my-zsh
+ln -sf $currentDir/.conky ~/.conky
 # install zsh stuff
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -29,6 +31,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 mkdir ~/.config
 ln -sf $currentDir/.config/nvim ~/.config/nvim
+ln -sf $currentDir/.config/tmux ~/.config/tmux
 ln -sf $currentDir/.config/coc ~/.config/coc
 ln -sf $currentDir/.config/kitty ~/.config/kitty
-ln -sf $currentDir/.conky ~/.conky

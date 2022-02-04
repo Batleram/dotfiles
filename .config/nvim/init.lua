@@ -9,6 +9,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'sainnhe/edge'
     Plug 'Batleram/uwu.vim'
     Plug '4513ECHO/vim-colors-hatsunemiku'
+    Plug ('frenzyexists/aquarium-vim', { ['branch']= 'develop' })
 
     -- LSP
     Plug 'neovim/nvim-lspconfig'
@@ -45,6 +46,7 @@ vim.g.edge_style = 'neon'
 vim.g.edge_enable_italic = 0
 vim.g.edge_disable_italic_comment = 1
 vim.g.UwuNR=1
+vim.g.aquarium_style="light"
 -- vim.cmd("colorscheme sonokai")
 --vim.cmd("colorscheme edge")
 vim.cmd("colorscheme uwu")
