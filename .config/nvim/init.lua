@@ -66,6 +66,9 @@ lsp_installer.on_server_ready(function(server)
     if server.name == "rust-analyzer" then
         options.procMacro.enable = false
     end
+    if server.name == "emmet_ls" then
+        options.filetypes = {"html","javascriptreact", "typescriptreact"}
+    end
     server:setup(options)
 end)
 
@@ -73,12 +76,13 @@ end)
 local lspconfig = require('lspconfig')
 local pid = vim.fn.getpid()
 local omnisharp_bin = "/home/me/.local/bin/omnisharp/run"
-require'lspconfig'.omnisharp.setup {
+lspconfig.omnisharp.setup {
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
     on_attach = function(client)
         require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
     end
 }
+lspconfig.emmet_ls.setup{filetypes = {"html", "javascriptreact", "typescriptreact"}}
 -- local omnisharp_bin = '/usr/bin/omnisharp'
 -- local pid = vim.fn.getpid()
 -- require'lspconfig'.omnisharp.setup{
@@ -114,37 +118,38 @@ keymap('n', '<a-cr>', ':Lspsaga code_action<CR>', {noremap = true, silent=true})
 keymap('v', '<a-cr>', ':Lspsaga range_code_action<CR>', {noremap = true, silent=true})
 
 -- setup nvim-compe
- local cmp = require'cmp'
- cmp.setup({
-      snippet = {
-       expand = function(args)
-         require("luasnip").lsp_expand(args.body)
-       end,
-     },
-     mapping = {
-         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-         ['<C-Space>'] = cmp.mapping.complete(),
-         ['<C-e>'] = cmp.mapping.close(),
-         ['<CR>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }),
-         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {"i","s",}),
-         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {"i","s",}),
-     },
-     sources = {
-         { name = 'nvim_lsp' },
-         { name = 'buffer' },
-         { name = 'luasnip' }
-     }
- })
+local cmp = require'cmp'
+cmp.setup({
+     snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
+    mapping = {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }),
+        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {"i","s",}),
+        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {"i","s",}),
+   },
+   sources = {
+   { name = 'nvim_lsp' },
+   { name = 'buffer' },
+   { name = 'luasnip' },
+   { name = "emmet_ls"}
+   }
+})
 
 -- TreeSitter
 require('nvim-treesitter.configs').setup({
   ensure_installed = "maintained",
   highlight = {
-    enable = true,
+      enable = true,
   },
   indent = {
-    enable = true
+      enable = false,
   }
 })
 -- parentheses pair
@@ -152,10 +157,11 @@ require('nvim-autopairs').setup{}
 cmp.event:on( 'confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({  map_char = { tex = '' } }))
 
 -- ale config
-vim.g.ale_fix_on_save = 1
-vim.g.ale_fixers = {"prettier",  "black", "rustfmt"}
-vim.g.ale_javascript_prettier_options = '--tab-width 4'
-vim.g.ale_linters = { cs =  {"OmniSharp"} }
+-- vim.g.ale_fix_on_save = 1
+-- vim.g.ale_fixers = {"prettier", "black", "rustfmt", "intelephense"}
+-- vim.g.ale_javascript_prettier_options = '--tab-width 4'
+-- vim.g.ale_linters = { cs =  {"OmniSharp"} }
+
 
 
 -- Toggle Comment
@@ -180,6 +186,11 @@ vim.o.expandtab = true
 
 -- set cusor margin
 vim.wo.scrolloff=3
+
+-- autocommands
+vim.api.nvim_command([[
+autocmd BufWritePre * lua vim.lsp.buf.formatting()
+]])
 
 -- remaps
 -- Y acts like D and C, it yoinks to end of line
