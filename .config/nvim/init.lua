@@ -26,6 +26,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
     -- UTIL
     Plug 'windwp/nvim-autopairs'
+    Plug 'windwp/nvim-ts-autotag'
     Plug 'terrortylor/nvim-comment'
 
     -- LINTING
@@ -143,14 +144,22 @@ cmp.setup({
 })
 
 -- TreeSitter
+local filetypes = {
+  'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript', 'php'
+}
 require('nvim-treesitter.configs').setup({
-  ensure_installed = "maintained",
-  highlight = {
-      enable = true,
-  },
-  indent = {
-      enable = false,
-  }
+    autotag = {
+        enable = true,
+        filetypes = filetypes
+    },
+    ensure_installed = "maintained",
+    highlight = {
+        enable = true,
+    },
+    indent = {
+        enable = true,
+        disable = {"css"}
+    }
 })
 -- parentheses pair
 require('nvim-autopairs').setup{}
