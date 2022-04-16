@@ -30,7 +30,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -113,9 +113,9 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 export DOT_DESKTOP=/usr/share/applications/
 
 #USER pacman autocomplete
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
-complete -cf sudo
+#[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+#    . /usr/share/bash-completion/bash_completion
+#complete -cf sudo
 #USER this runs neofetch on start
 #neofetch
 
@@ -126,18 +126,6 @@ alias altf4="exit"
 # bash reload command
 alias rel="source ~/.zshrc"
 
-# nick command
-function nick(){
-if [ $# -eq 0 ]
-then
-	echo "You need to specify an option"
-else
-	sudo rm /etc/hostname
-	sudo echo $1 |sudo tee /etc/hostname
-fi
-}
-
-
 # plateformio
 export PATH=$PATH:~/.platformio/penv/bin
 
@@ -145,4 +133,11 @@ export PATH=$PATH:~/.platformio/penv/bin
 export PATH="$PATH:/home/me/.dotnet/tools"
 
 # default editor
-export EDITOR='program'
+export EDITOR='vim'
+alias nivm="nvim" # i'm annoyed
+
+# ctrl backspace support
+bindkey '^H' backward-kill-word
+
+# docker reload alias
+alias docker-reload="docker-compose down && docker-compose up -d --build"
