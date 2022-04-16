@@ -13,7 +13,7 @@ OSH_THEME="agnoster"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
@@ -104,3 +104,10 @@ source $OSH/oh-my-bash.sh
 # bash reload command
 alias rel="source ~/.bashrc"
 . "$HOME/.cargo/env"
+alias nivm="nvim" #i'm annoyed
+alias docker-reload="docker-compose down && docker-compose up --build -d"
+export EDITOR='vim'
+# plateformio
+export PATH=$PATH:~/.platformio/penv/bin
+
+
