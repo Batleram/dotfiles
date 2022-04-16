@@ -16,13 +16,14 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate']})
     Plug 'tami5/lspsaga.nvim'
     Plug 'williamboman/nvim-lsp-installer'
-    
+
     -- COMPLETION
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'rafamadriz/friendly-snippets'
 
     -- UTIL
     Plug 'windwp/nvim-autopairs'
@@ -119,6 +120,7 @@ keymap('n', '<a-cr>', ':Lspsaga code_action<CR>', {noremap = true, silent=true})
 keymap('v', '<a-cr>', ':Lspsaga range_code_action<CR>', {noremap = true, silent=true})
 
 -- setup nvim-compe
+require("luasnip.loaders.from_vscode").lazy_load() -- snippets
 local cmp = require'cmp'
 cmp.setup({
      snippet = {
@@ -139,7 +141,7 @@ cmp.setup({
    { name = 'nvim_lsp' },
    { name = 'buffer' },
    { name = 'luasnip' },
-   { name = "emmet_ls"}
+   -- { name = "emmet_ls"}
    }
 })
 
@@ -194,7 +196,7 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- set cusor margin
-vim.wo.scrolloff=3
+vim.g.scrolloff=3
 
 -- autocommands
 vim.api.nvim_command([[
@@ -205,4 +207,5 @@ autocmd BufWritePre * lua vim.lsp.buf.formatting()
 -- Y acts like D and C, it yoinks to end of line
 keymap('n', 'Y', 'y$', {noremap = true})
 keymap('n', '<Space>nt', ':NERDTree<CR>', {noremap = true})
+keymap('i', '<C-H>', '<C-\\><C-o>db',{noremap = true})
 
