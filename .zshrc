@@ -132,6 +132,9 @@ export PATH=$PATH:~/.platformio/penv/bin
 # csharp-ls
 export PATH="$PATH:/home/me/.dotnet/tools"
 
+# lvim
+export PATH="$PATH:/home/me/.local/bin/"
+
 # default editor
 export EDITOR='vim'
 alias nivm="nvim" # i'm annoyed
