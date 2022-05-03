@@ -68,9 +68,9 @@ lsp_installer.on_server_ready(function(server)
     if server.name == "rust-analyzer" then
         options.procMacro.enable = false
     end
-    if server.name == "emmet_ls" then
-        options.filetypes = { "html", "javascriptreact", "typescriptreact" }
-    end
+    -- if server.name == "emmet_ls" then
+    --     options.filetypes = { "html", "javascriptreact", "typescriptreact" }
+    -- end
     server:setup(options)
 end)
 
@@ -136,6 +136,38 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = false }),
         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s", }),
         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s", }),
+        ['<C-n>'] = cmp.mapping({
+            c = function()
+                if cmp.visible() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
+                end
+            end,
+            i = function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    fallback()
+                end
+            end
+        }),
+        ['<C-p>'] = cmp.mapping({
+            c = function()
+                if cmp.visible() then
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
+                end
+            end,
+            i = function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    fallback()
+                end
+            end
+        }),
     },
     sources = {
         { name = 'nvim_lsp' },
@@ -212,4 +244,4 @@ keymap('n', '<leader>nt', ':NERDTree<CR>', { noremap = true })
 -- ctrl backpace in insert mode
 keymap('i', '<C-H>', '<C-\\><C-o>db', { noremap = true })
 -- format text
-keymap('n', '<leader>f', ':lua vim.lsp.buf.formatting()<CR>', { noremap = true })
+keymap('n', '<leader>f', ':lua vim.lsp.buf.formatting()<CR>:w<CR>', { noremap = true })
