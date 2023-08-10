@@ -32,9 +32,36 @@ require('nvim-treesitter.configs').setup({
         disable = { "css" }
     }
 })
+require 'treesitter-context'.setup {
+    enable = true,
+    max_lines = 0,
+    min_window_height = 0,
+    line_numbers = true,
+    multiline_threshold = 20,
+    trim_scope = 'outer',
+    mode = 'cursor',
+    separator = nil,
+    zindex = 20,
+}
 
 -- parentheses pair
 require('nvim-autopairs').setup {}
+
+-- telescope
+require('telescope').setup {
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+
+        }
+    }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
 
 -- disable wrap
 vim.wo.wrap = false
@@ -50,3 +77,6 @@ vim.o.expandtab = true
 
 -- set cusor margin
 vim.cmd("set scrolloff=5")
+
+-- disable mouse
+vim.cmd("set mouse=")

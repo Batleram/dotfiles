@@ -35,6 +35,7 @@ return require('packer').startup(function(use)
 
     -- LSP
     use { 'nvim-treesitter/nvim-treesitter', { run = vim.fn['TSUpdate'] } }
+    use {'nvim-treesitter/nvim-treesitter-context'}
 
     -- UTIL
     use { 'windwp/nvim-autopairs' }
@@ -44,6 +45,7 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LINTING
     use { 'dense-analysis/ale' }
