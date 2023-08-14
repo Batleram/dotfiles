@@ -8,6 +8,7 @@ return require('packer').startup(function(use)
     use { 'Batleram/uwu.vim' }
     use { '4513ECHO/vim-colors-hatsunemiku' }
     use { 'frenzyexists/aquarium-vim' }
+    use { 'nvim-tree/nvim-web-devicons' }
 
     -- LSP-Zero
     use {
@@ -35,7 +36,7 @@ return require('packer').startup(function(use)
 
     -- LSP
     use { 'nvim-treesitter/nvim-treesitter', { run = vim.fn['TSUpdate'] } }
-    use {'nvim-treesitter/nvim-treesitter-context'}
+    use { 'nvim-treesitter/nvim-treesitter-context' }
 
     -- UTIL
     use { 'windwp/nvim-autopairs' }
@@ -45,7 +46,7 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LINTING
     use { 'dense-analysis/ale' }
@@ -56,9 +57,6 @@ return require('packer').startup(function(use)
     use({
         "glepnir/lspsaga.nvim",
         branch = "main",
-        config = function()
-            require("lspsaga").setup({})
-        end,
         requires = {
             { "nvim-tree/nvim-web-devicons" },
             --Please make sure you install markdown and markdown_inline parser

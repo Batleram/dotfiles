@@ -19,6 +19,7 @@ vim.cmd("colorscheme uwu")
 local filetypes = {
     'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript', 'php'
 }
+
 require('nvim-treesitter.configs').setup({
     autotag = {
         enable = true,
@@ -32,6 +33,7 @@ require('nvim-treesitter.configs').setup({
         disable = { "css" }
     }
 })
+
 require 'treesitter-context'.setup {
     enable = true,
     max_lines = 0,
@@ -43,6 +45,16 @@ require 'treesitter-context'.setup {
     separator = nil,
     zindex = 20,
 }
+
+-- lspsaga
+require "lspsaga".setup({
+    outline = {
+        layout = 'float'
+    },
+    lightbulb = {
+        virtual_text = false
+    }
+})
 
 -- parentheses pair
 require('nvim-autopairs').setup {}
@@ -59,9 +71,18 @@ require('telescope').setup {
         }
     }
 }
+
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
+
+-- setup cmp
+local cmp = require "cmp"
+cmp.setup({
+    mapping = {
+        ['<C-Space>'] = cmp.mapping.completed
+    }
+})
 
 -- disable wrap
 vim.wo.wrap = false
@@ -71,6 +92,7 @@ vim.wo.number = true
 vim.wo.rnu = true
 
 -- set tabsize
+vim.o.smartindent = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
@@ -80,3 +102,6 @@ vim.cmd("set scrolloff=5")
 
 -- disable mouse
 vim.cmd("set mouse=")
+
+-- always show sign column
+vim.o.signcolumn = "yes:1"
