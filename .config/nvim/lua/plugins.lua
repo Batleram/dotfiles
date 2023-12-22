@@ -43,7 +43,7 @@ return require('packer').startup(function(use)
     use { 'windwp/nvim-ts-autotag' }
     use { 'terrortylor/nvim-comment' }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.4',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
