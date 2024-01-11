@@ -84,6 +84,9 @@ cmp.setup({
     }
 })
 
+-- setup vimtex
+vim.g.vimtex_view_general_viewer = 'okular'
+
 -- disable wrap
 vim.wo.wrap = false
 
