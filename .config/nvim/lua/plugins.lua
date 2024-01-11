@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     -- LSP
     use { 'nvim-treesitter/nvim-treesitter', { run = vim.fn['TSUpdate'] } }
     use { 'nvim-treesitter/nvim-treesitter-context' }
+    use { 'lervag/vimtex' }
 
     -- UTIL
     use { 'windwp/nvim-autopairs' }

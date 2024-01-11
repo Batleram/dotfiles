@@ -14,7 +14,7 @@ keymap("n", "<C-.>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = 
 keymap("i", "<C-Space>", "<cmd>lua print('test')<CR>", { noremap = true, silent = true })
 
 -- y acts like d and c, it yoinks to end of line
-keymap('n', 'Y', 'y$', { noremap = true })
+-- keymap('n', 'Y', 'y$', { noremap = true })
 
 -- open nerdtree
 keymap('n', '<leader>nt', '<cmd>NERDTree<cr>', { noremap = true })
