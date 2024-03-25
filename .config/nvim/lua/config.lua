@@ -60,6 +60,7 @@ require "lspsaga".setup({
 require('nvim-autopairs').setup {}
 
 -- telescope
+local actions = require("telescope.actions")
 require('telescope').setup {
     extensions = {
         fzf = {
@@ -68,6 +69,13 @@ require('telescope').setup {
             override_file_sorter = true,
             case_mode = "smart_case",
 
+        }
+    },
+    defaults ={
+        mappings ={
+            i = {
+                ["<esc>"] = actions.close,
+            }
         }
     }
 }
