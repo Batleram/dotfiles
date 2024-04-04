@@ -122,6 +122,7 @@ export DOT_DESKTOP=/usr/share/applications/
 #aliases
 alias vi="nvim"
 alias altf4="exit"
+alias stus="echo 'stfu you goddamn weeb trash'"
 
 # bash reload command
 alias rel="source ~/.zshrc"
@@ -148,3 +149,6 @@ alias docker-reload="docker-compose down && docker-compose up -d --build"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# tmp run arm files
+alias armrun="/usr/bin/qemu-arm-static"
