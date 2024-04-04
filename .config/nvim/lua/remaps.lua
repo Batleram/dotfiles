@@ -16,6 +16,9 @@ keymap("i", "<C-Space>", "<cmd>lua print('test')<CR>", { noremap = true, silent 
 -- y acts like d and c, it yoinks to end of line
 -- keymap('n', 'Y', 'y$', { noremap = true })
 
+-- noh esc in normal mode
+keymap('n', '<esc>', '<cmd>noh<cr>', { noremap = true })
+
 -- open nerdtree
 keymap('n', '<leader>nt', '<cmd>NERDTree<cr>', { noremap = true })
 
@@ -42,7 +45,7 @@ keymap('n', '}', '}zz', { noremap = true })
 keymap('n', '{', '{zz', { noremap = true })
 
 -- reload vimrc
-keymap('n', '<leader>so', '<cmd>source $MYVIMRC<cr>', { noremap = true })
+keymap('n', '<leader>so', '<cmd>source $MYVIMRC|echo "asdf"<cr>', { noremap = true })
 
 -- edit vimrc
 keymap('n', '<leader>evr', '<cmd>e $MYVIMRC<cr>', { noremap = true })
