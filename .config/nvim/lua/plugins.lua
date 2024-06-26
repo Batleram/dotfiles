@@ -50,10 +50,12 @@ return require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LINTING
-    use { 'dense-analysis/ale' }
+    use { 'folke/trouble.nvim' }
 
     -- QOL
+    use {'romainl/vim-qf' } -- damn quickfix lists
     use { 'tpope/vim-fugitive' }
+    use { 'mhinz/vim-signify' }
     use { 'christoomey/vim-tmux-navigator' }
     use({
         "glepnir/lspsaga.nvim",

@@ -122,7 +122,6 @@ export DOT_DESKTOP=/usr/share/applications/
 #aliases
 alias vi="nvim"
 alias altf4="exit"
-alias stus="echo 'stfu you goddamn weeb trash'"
 
 # bash reload command
 alias rel="source ~/.zshrc"
@@ -152,3 +151,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # tmp run arm files
 alias armrun="/usr/bin/qemu-arm-static"
+

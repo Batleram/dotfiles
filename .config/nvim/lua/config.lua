@@ -14,10 +14,15 @@ vim.g.aquarium_style = "light"
 -- vim.cmd("colorscheme sonokai")
 --vim.cmd("colorscheme edge")
 vim.cmd("colorscheme uwu")
+vim.cmd('hi! link CurSearch Search') -- laggy colorscheme sometimes when scrolling with highlights
+
+-- fold things
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 -- TreeSitter
 local filetypes = {
-    'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript', 'php'
+    'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript', 'php', 'c', 'lua'
 }
 
 require('nvim-treesitter.configs').setup({
@@ -76,7 +81,9 @@ require('telescope').setup {
             i = {
                 ["<esc>"] = actions.close,
             }
-        }
+        },
+        layout_strategy = "vertical",
+
     }
 }
 
@@ -91,6 +98,9 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.completed
     }
 })
+
+-- signify set update interval
+vim.g.updatetime=100
 
 -- setup vimtex
 vim.g.vimtex_view_general_viewer = 'okular'

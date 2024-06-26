@@ -11,7 +11,11 @@ keymap('v', '<leader><CR>', '<cmd>Lspsaga range_code_action<CR>', { noremap = tr
 keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { noremap = true, silent = true })
 keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { noremap = true, silent = true })
 keymap("n", "<C-.>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
+keymap("n", "<leader><Space>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
 keymap("i", "<C-Space>", "<cmd>lua print('test')<CR>", { noremap = true, silent = true })
+
+-- Show error info
+keymap("v", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", {noremap = true, silent = true})
 
 -- y acts like d and c, it yoinks to end of line
 -- keymap('n', 'Y', 'y$', { noremap = true })
@@ -59,8 +63,33 @@ require('nvim_comment').setup({
 
 -- telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>ff', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+local telescope = require("telescope")
+keymap('n', '<C-p>', builtin.find_files, {})
+keymap('n', '<leader>fg', builtin.live_grep, {})
+keymap('n', '<leader>ff', builtin.live_grep, {})
+keymap('n', '<leader>fb', "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>", {})
+keymap('n', '<leader>fh', builtin.help_tags, {})
+
+-- quickfix list editing
+-- cba to convert to vimscript
+vim.api.nvim_exec(
+[[ 
+    " Normal: `dd` removes item from the quickfix list.
+
+    " Visual: `d` removes all selected items, gk keeps all selected items
+    augroup custom_qf_mapping
+          autocmd!
+      autocmd FileType qf nnoremap <buffer> dd :.Reject<CR>
+      autocmd FileType qf nnoremap <buffer> dj :.Reject<CR>
+      autocmd FileType qf nnoremap <buffer> dk :.Reject<CR>
+
+      autocmd FileType qf xnoremap <buffer> d  :'<,'>Reject<CR>
+      autocmd FileType qf xnoremap <buffer> dh :'<,'>Reject<CR>
+      autocmd FileType qf xnoremap <buffer> dl :'<,'>Reject<CR>
+
+      autocmd FileType qf nnoremap <buffer> gk :.Keep<CR>
+      autocmd FileType qf xnoremap <buffer> gk :'<,'>Keep<CR>
+
+      autocmd FileType qf xnoremap <buffer> u  :Restore<CR>
+    augroup END
+]], false)

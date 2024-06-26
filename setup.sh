@@ -13,6 +13,7 @@ rm -rf ~/.config/nvim
 rm -rf ~/.config/coc 
 rm -rf ~/.config/kitty
 rm -rf ~/.config/tmux
+rm -rf ~/.tmux.conf
 rm -rf ~/.conky
 
 ln -sf $currentDir/.zshrc ~/.zshrc
@@ -23,6 +24,7 @@ ln -sf $currentDir/.p10k.zsh ~/.p10k.zsh
 ln -sf $currentDir/.oh-my-bash ~/.oh-my-bash
 ln -sf $currentDir/.oh-my-zsh ~/.oh-my-zsh
 ln -sf $currentDir/.conky ~/.conky
+ln -sf $currentDir/.tmux.conf ~/.tmux.conf
 # install zsh stuff
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
