@@ -42,7 +42,6 @@ return require('packer').startup(function(use)
     -- UTIL
     use { 'windwp/nvim-autopairs' }
     use { 'windwp/nvim-ts-autotag' }
-    use { 'terrortylor/nvim-comment' }
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.4',
         requires = { { 'nvim-lua/plenary.nvim' } }

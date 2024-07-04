@@ -54,13 +54,6 @@ keymap('n', '<leader>so', '<cmd>source $MYVIMRC|echo "asdf"<cr>', { noremap = tr
 -- edit vimrc
 keymap('n', '<leader>evr', '<cmd>e $MYVIMRC<cr>', { noremap = true })
 
--- toggle comment on ctrl slash
-require('nvim_comment').setup({
-    line_mapping = "<C-/>",
-    operator_mapping = "<C-/>",
-    comment_empty = false
-})
-
 -- telescope
 local builtin = require('telescope.builtin')
 local telescope = require("telescope")
