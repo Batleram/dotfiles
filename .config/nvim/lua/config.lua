@@ -61,6 +61,13 @@ require "lspsaga".setup({
     }
 })
 
+-- lsp configurations
+require('lspconfig').clangd.setup({
+    init_options = {
+        cmd = {'clangd', '-header-insertion=never'}
+    }
+})
+
 -- parentheses pair
 require('nvim-autopairs').setup {}
 
