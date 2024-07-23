@@ -21,14 +21,19 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 -- TreeSitter
-local filetypes = {
-    'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'rescript', 'php', 'c', 'lua'
-}
-
 require('nvim-treesitter.configs').setup({
     autotag = {
         enable = true,
-        filetypes = filetypes
+        filetypes = {
+            'html',
+            'javascript',
+            'javascriptreact',
+            'typescriptreact',
+            'svelte',
+            'vue',
+            'rescript',
+            'php',
+        }
     },
     highlight = {
         enable = true,
@@ -36,6 +41,22 @@ require('nvim-treesitter.configs').setup({
     indent = {
         enable = true,
         disable = { "css" }
+    },
+    ensure_installed = {
+        'javascript',
+        'typescript',
+        'c',
+        'cpp',
+        'lua',
+        'vimdoc',
+        'proto',
+        'vim',
+        'sql',
+        'scss',
+        'html',
+        'make',
+        'cmake',
+        'bash'
     }
 })
 
