@@ -130,10 +130,10 @@ alias rel="source ~/.zshrc"
 export PATH=$PATH:~/.platformio/penv/bin
 
 # csharp-ls
-export PATH="$PATH:/home/me/.dotnet/tools"
+export PATH="$PATH:/home/$USER/.dotnet/tools"
 
 # lvim
-export PATH="$PATH:/home/me/.local/bin/"
+export PATH="$PATH:/home/$USER/.local/bin/"
 
 # default editor
 export EDITOR='vim'
