@@ -1,5 +1,4 @@
 require('plugins')
-require('config')
 
 local lsp = require('lsp-zero').preset({
     name = 'minimal',
@@ -8,12 +7,11 @@ local lsp = require('lsp-zero').preset({
     suggest_lsp_servers = false,
 })
 
+
 lsp.nvim_workspace()
 
 lsp.setup()
 
--- lsp configurations
-local clang_path = vim.fs.normalize(vim.api.nvim_eval("stdpath('data')") .. '/mason/bin/clangd', {})
-require('lspconfig').clangd.setup({
-    cmd = { clang_path, '-header-insertion=never'}
-})
+require('config')
+
+
