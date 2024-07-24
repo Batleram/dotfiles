@@ -82,6 +82,7 @@ require "lspsaga".setup({
     }
 })
 
+
 -- parentheses pair
 require('nvim-autopairs').setup {}
 
@@ -114,10 +115,39 @@ require('telescope').load_extension('fzf')
 
 -- setup cmp
 local cmp = require "cmp"
+
+-- fix for too wide suggestions
+local ELLIPSIS_CHAR = '…'
+local MAX_LABEL_WIDTH = 75
+
+local get_ws = function (max, len)
+    return (" "):rep(max - len)
+end
+
+local format = function(_, item)
+local content = item.abbr
+    if #content > MAX_LABEL_WIDTH then
+        item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+    else
+        item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
+    end
+
+    return item
+end
+
 cmp.setup({
     mapping = {
         ['<C-Space>'] = cmp.mapping.completed
+    },
+    formatting = {
+        format = format
     }
+})
+
+-- lsp configurations
+local clang_path = vim.fs.normalize(vim.api.nvim_eval("stdpath('data')") .. '/mason/bin/clangd', {})
+require('lspconfig').clangd.setup({
+    cmd = { clang_path, '-header-insertion=never'}
 })
 
 -- signify set update interval
