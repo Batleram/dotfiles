@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
     use { 'mhinz/vim-signify' }
     use { 'christoomey/vim-tmux-navigator' }
     use({
-        "glepnir/lspsaga.nvim",
+        "nvimdev/lspsaga.nvim",
         branch = "main",
         requires = {
             { "nvim-tree/nvim-web-devicons" },

@@ -11,7 +11,7 @@ keymap('v', '<leader><CR>', '<cmd>Lspsaga range_code_action<CR>', { noremap = tr
 keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { noremap = true, silent = true })
 keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { noremap = true, silent = true })
 keymap("n", "<C-.>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
-keymap("n", "<leader><Space>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
+keymap("n", "<Leader><Space>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
 keymap("i", "<C-Space>", "<cmd>lua print('test')<CR>", { noremap = true, silent = true })
 
 -- Show error info
