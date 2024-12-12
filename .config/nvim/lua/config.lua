@@ -98,8 +98,8 @@ require('telescope').setup {
 
         }
     },
-    defaults ={
-        mappings ={
+    defaults = {
+        mappings = {
             i = {
                 ["<esc>"] = actions.close,
             }
@@ -116,42 +116,55 @@ require('telescope').load_extension('fzf')
 -- setup cmp
 local cmp = require "cmp"
 
--- fix for too wide suggestions
-local ELLIPSIS_CHAR = '…'
-local MAX_LABEL_WIDTH = 75
-
-local get_ws = function (max, len)
-    return (" "):rep(max - len)
-end
-
-local format = function(_, item)
-local content = item.abbr
-    if #content > MAX_LABEL_WIDTH then
-        item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
-    else
-        item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
-    end
-
-    return item
-end
-
 cmp.setup({
     mapping = {
         ['<C-Space>'] = cmp.mapping.completed
     },
+    -- fix for too wide suggestions
     formatting = {
-        format = format
+        fields = { "abbr", "menu", "kind" },
+        format = function(_entry, item)
+            local win_width = vim.api.nvim_win_get_width(0)
+            local suggestion_width = math.floor(win_width * 0.20)
+            local signature_width = math.floor(win_width * 0.30)
+
+            -- Get the completion entry text shown in the completion window.
+            local content = item.abbr
+
+            -- Set the fixed completion window width.
+            if suggestion_width then
+                vim.o.pumwidth = suggestion_width + signature_width + 10
+            end
+
+            -- Truncate the suggestion
+            if #content > suggestion_width then
+                item.abbr = vim.fn.strcharpart(content, 0, suggestion_width - 3) .. "..."
+            else
+                item.abbr = content .. (" "):rep(suggestion_width - #content)
+            end
+
+            local signature = item.menu or ""
+
+            -- Truncate the signature
+            if  #signature > signature_width then
+                item.menu = vim.fn.strcharpart(signature, 0, signature_width - 3) .. "..."
+            else
+                item.menu = signature .. (" "):rep(signature_width - #signature)
+            end
+
+            return item
+        end,
     }
 })
 
 -- lsp configurations
 local clang_path = vim.fs.normalize(vim.api.nvim_eval("stdpath('data')") .. '/mason/bin/clangd', {})
 require('lspconfig').clangd.setup({
-    cmd = { clang_path, '-header-insertion=never'}
+    cmd = { clang_path, '-header-insertion=never' }
 })
 
 -- signify set update interval
-vim.g.updatetime=100
+vim.g.updatetime = 100
 
 -- setup vimtex
 vim.g.vimtex_view_general_viewer = 'okular'
