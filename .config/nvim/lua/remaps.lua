@@ -86,3 +86,8 @@ vim.api.nvim_exec(
       autocmd FileType qf xnoremap <buffer> u  :Restore<CR>
     augroup END
 ]], false)
+
+
+-- quickfix navigation
+keymap('n', '<M-]>', "<cmd>cnext<cr>")
+keymap('n', '<M-[>', "<cmd>cprevious<cr>")
