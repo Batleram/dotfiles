@@ -47,12 +47,19 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {
+        'chomosuke/typst-preview.nvim',
+        tag = 'v1.*',
+        config = function()
+            require 'typst-preview'.setup {}
+        end,
+    }
 
     -- LINTING
     use { 'folke/trouble.nvim' }
 
     -- QOL
-    use {'romainl/vim-qf' } -- damn quickfix lists
+    use { 'romainl/vim-qf' } -- damn quickfix lists
     use { 'tpope/vim-fugitive' }
     use { 'mhinz/vim-signify' }
     use { 'christoomey/vim-tmux-navigator' }
