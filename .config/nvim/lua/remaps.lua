@@ -3,22 +3,8 @@ local keymap = vim.keymap.set
 
 vim.cmd("let mapleader = ' '")
 
--- lspasaga
-keymap('n', '<leader>r', '<cmd>Lspsaga rename<cr>', { noremap = true, silent = true })
-keymap('n', '<leader>o', '<cmd>Lspsaga outline<cr>', { noremap = true, silent = true })
-keymap('n', '<leader><CR>', '<cmd>Lspsaga code_action<CR>', { noremap = true, silent = true })
-keymap('v', '<leader><CR>', '<cmd>Lspsaga range_code_action<CR>', { noremap = true, silent = true })
-keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { noremap = true, silent = true })
-keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { noremap = true, silent = true })
-keymap("n", "<C-.>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
-keymap("n", "<Leader><Space>", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
-keymap("i", "<C-Space>", "<cmd>lua print('test')<CR>", { noremap = true, silent = true })
-
 -- Show error info
 keymap("v", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", {noremap = true, silent = true})
-
--- y acts like d and c, it yoinks to end of line
--- keymap('n', 'Y', 'y$', { noremap = true })
 
 -- noh esc in normal mode
 keymap('n', '<esc>', '<cmd>noh<cr>', { noremap = true })
@@ -47,9 +33,6 @@ keymap('v', '<leader>f', '<cmd>lua FormatRange()<cr><cmd>w<cr>', { noremap = tru
 -- center on chunk down
 keymap('n', '}', '}zz', { noremap = true })
 keymap('n', '{', '{zz', { noremap = true })
-
--- reload vimrc
-keymap('n', '<leader>so', '<cmd>source $MYVIMRC|echo "asdf"<cr>', { noremap = true })
 
 -- edit vimrc
 keymap('n', '<leader>evr', '<cmd>e $MYVIMRC<cr>', { noremap = true })
