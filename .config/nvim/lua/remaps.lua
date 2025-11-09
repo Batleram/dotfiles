@@ -1,20 +1,19 @@
 -- To find a mapping syntax, do `:map ^v <mapping>` where <mapping> is your mapping
-local keymap = vim.keymap.set
 
 vim.cmd("let mapleader = ' '")
 
 -- Show error info
-keymap("v", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", {noremap = true, silent = true})
+vim.keymap.set("v", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", {noremap = true, silent = true})
 
 -- noh esc in normal mode
-keymap('n', '<esc>', '<cmd>noh<cr>', { noremap = true })
+vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { noremap = true })
 
 -- open nerdtree
-keymap('n', '<leader>nt', '<cmd>NERDTree<cr>', { noremap = true })
+vim.keymap.set('n', '<leader>nt', '<cmd>NERDTree<cr>', { noremap = true })
 
 -- ctrl backpace in insert mode
-keymap('i', '<c-H>', '<c-\\><c-o>db', { noremap = true })
-keymap('i', '<c-BS>', '<c-\\><c-o>db', { noremap = true })
+vim.keymap.set('i', '<c-H>', '<c-\\><c-o>db', { noremap = true })
+vim.keymap.set('i', '<c-BS>', '<c-\\><c-o>db', { noremap = true })
 
 -- format text
 function FormatRange()
@@ -27,24 +26,30 @@ function FormatRange()
     })
 end
 
-keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr><cmd>w<cr>', { noremap = true })
-keymap('v', '<leader>f', '<cmd>lua FormatRange()<cr><cmd>w<cr>', { noremap = true })
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { noremap = true })
+vim.keymap.set('v', '<leader>f', FormatRange, { noremap = true })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
+vim.keymap.set("n", '<leader><Space>', vim.lsp.buf.code_action, { noremap = true, silent = true })
+vim.keymap.set("n", '<C-.>',  vim.lsp.buf.code_action, { noremap = true, silent = true })
+
 
 -- center on chunk down
-keymap('n', '}', '}zz', { noremap = true })
-keymap('n', '{', '{zz', { noremap = true })
+vim.keymap.set('n', '}', '}zz', { noremap = true })
+vim.keymap.set('n', '{', '{zz', { noremap = true })
 
 -- edit vimrc
-keymap('n', '<leader>evr', '<cmd>e $MYVIMRC<cr>', { noremap = true })
+vim.keymap.set('n', '<leader>evr', '<cmd>e $MYVIMRC<cr>', { noremap = true })
 
 -- telescope
 local builtin = require('telescope.builtin')
 local telescope = require("telescope")
-keymap('n', '<C-p>', builtin.find_files, {})
-keymap('n', '<leader>fg', builtin.live_grep, {})
-keymap('n', '<leader>ff', builtin.live_grep, {})
-keymap('n', '<leader>fb', "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>", {})
-keymap('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>ff', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>", {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- quickfix list editing
 -- cba to convert to vimscript
@@ -72,5 +77,5 @@ vim.api.nvim_exec(
 
 
 -- quickfix navigation
-keymap('n', '<M-]>', "<cmd>cnext<cr>")
-keymap('n', '<M-[>', "<cmd>cprevious<cr>")
+vim.keymap.set('n', '<M-]>', "<cmd>cnext<cr>")
+vim.keymap.set('n', '<M-[>', "<cmd>cprevious<cr>")

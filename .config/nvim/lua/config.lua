@@ -128,5 +128,8 @@ vim.o.signcolumn = "yes:1"
 
 -- enable coq
 vim.g.coq_settings = {
-    auto_start = 'shut-up'
+    auto_start = 'shut-up',
+    keymap = {
+        jump_to_mark = '<M-h>', -- defaults to ^H, which is my ctrl-backspace 
+    },
 }
