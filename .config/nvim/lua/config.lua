@@ -1,5 +1,9 @@
 require('remaps')
 
+-- don't continue comments
+
+vim.opt.formatoptions = "cqnj" -- default: "tcqj"
+
 -- apply color scheme
 vim.o.termguicolors = true
 -- available themes: default atlantis andromeda shusia maia
