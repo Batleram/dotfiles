@@ -8,4 +8,5 @@ vim.lsp.enable("pyright")
 vim.lsp.enable("vhdl_ls")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("templ")
 

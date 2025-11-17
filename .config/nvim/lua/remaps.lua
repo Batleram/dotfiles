@@ -5,6 +5,9 @@ vim.cmd("let mapleader = ' '")
 -- Show error info
 vim.keymap.set("v", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", {noremap = true, silent = true})
 
+-- restore manpage command on K
+vim.keymap.set("n", "<c-k>", "K", {noremap = true, silent = true})
+
 -- noh esc in normal mode
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { noremap = true })
 
